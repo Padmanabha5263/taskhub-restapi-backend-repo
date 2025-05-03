@@ -1,0 +1,7 @@
+{
+  "httpMethod": "PUT",
+  "body": "{\"age\": 41,\"email\": \"testing@test.com\",\"isActiveEmp\": true,\"mobile\": \"7411779283\",\"name\": \"test\"}",
+  "pathParameters": {
+    "id": "1746244889504-0640"
+  }
+}

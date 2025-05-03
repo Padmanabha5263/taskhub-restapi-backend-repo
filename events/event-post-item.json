@@ -1,4 +1,4 @@
 {
-    "httpMethod": "POST",
-    "body": "{\"id\": \"id1\",\"name\": \"name1\"}"
+  "httpMethod": "POST",
+  "body": "{\"EmployeeId\": 12333333333222,\"age\": 21,\"email\": \"test@test.com\",\"isActiveEmp\": true,\"mobile\": \"7411779283\",\"name\": \"test\"}"
 }

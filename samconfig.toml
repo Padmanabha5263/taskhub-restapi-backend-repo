@@ -16,6 +16,10 @@ lint = true
 capabilities = "CAPABILITY_IAM"
 confirm_changeset = true
 resolve_s3 = true
+s3_prefix = "taskhub-restapi-backend-repo"
+region = "ap-south-1"
+profile = "AdministratorAccess-977098988167"
+image_repositories = []
 
 [default.package.parameters]
 resolve_s3 = true

@@ -1,0 +1,48 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "getEmployeeById",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/src/localtests/getByIdApiTest.mjs",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "CreateEmployee",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/src/localtests/createEmployeeTest.mjs",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "UpdateEmployee",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/src/localtests/updateEmployeeTest.mjs",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "DeleteEmployee",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/src/localtests/deleteEmployeeTest.mjs",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
