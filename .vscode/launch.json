@@ -7,9 +7,9 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "getEmployeeById",
+      "name": "getTasksByUserId",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}/src/localtests/getByIdApiTest.mjs",
+      "program": "${workspaceFolder}/src/localtests/getTasksByUserIdTest.mjs",
       "console": "integratedTerminal",
       "cwd": "${workspaceFolder}",
       "envFile": "${workspaceFolder}/.env"
