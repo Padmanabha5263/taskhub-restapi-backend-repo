@@ -17,9 +17,9 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "CreateEmployee",
+      "name": "CreateTask",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}/src/localtests/createEmployeeTest.mjs",
+      "program": "${workspaceFolder}/src/localtests/createTaskTest.mjs",
       "console": "integratedTerminal",
       "cwd": "${workspaceFolder}",
       "envFile": "${workspaceFolder}/.env"

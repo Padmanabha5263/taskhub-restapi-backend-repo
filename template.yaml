@@ -17,6 +17,38 @@ Resources:
     Properties:
       StageName: Dev
       Name: TaskHub
+      Auth:
+        ApiKeyRequired: true
+  TaskHubApiKey:
+    Type: AWS::ApiGateway::ApiKey
+    Properties:
+      Name: TaskHubApiKey
+      Description: API Key for TaskHub API
+      Enabled: true
+
+  # Create a Usage Plan
+  TaskHubUsagePlan:
+    Type: AWS::ApiGateway::UsagePlan
+    Properties:
+      UsagePlanName: TaskHubUsagePlan
+      Description: Usage plan for TaskHub API
+      ApiStages:
+        - ApiId: !Ref TaskHubApiGatewayApi
+          Stage: Dev
+      Quota:
+        Limit: 5000
+        Period: MONTH
+      Throttle:
+        BurstLimit: 10
+        RateLimit: 5
+
+  # Associate the API Key with the Usage Plan
+  TaskHubUsagePlanKey:
+    Type: AWS::ApiGateway::UsagePlanKey
+    Properties:
+      KeyId: !Ref TaskHubApiKey
+      KeyType: API_KEY
+      UsagePlanId: !Ref TaskHubUsagePlan
 
   TaskFunction:
     Type: AWS::Serverless::Function
@@ -35,6 +67,9 @@ Resources:
               Action:
                 - dynamodb:Query
                 - dynamodb:Scan
+                - dynamodb:PutItem
+                - dynamodb:DeleteItem
+                - dynamodb:UpdateItem
               Resource:
                 - !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/task"
                 - !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/task/index/*"
@@ -45,3 +80,9 @@ Resources:
             RestApiId: !Ref TaskHubApiGatewayApi
             Path: /tasks/{UserId} # this api will list all the tasks created by the perticular user
             Method: GET
+        CreateTask:
+          Type: Api
+          Properties:
+            RestApiId: !Ref TaskHubApiGatewayApi
+            Path: /tasks # from this api we can create the task
+            Method: POST

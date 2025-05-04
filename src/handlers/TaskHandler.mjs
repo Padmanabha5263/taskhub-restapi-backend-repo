@@ -2,7 +2,13 @@
 
 // Create a DocumentClient that represents the query to add an item
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { DynamoDBDocumentClient, QueryCommand } from "@aws-sdk/lib-dynamodb";
+import {
+  DynamoDBDocumentClient,
+  PutCommand,
+  QueryCommand,
+} from "@aws-sdk/lib-dynamodb";
+import { uniqueIdGenerator } from "./utils/common.mjs";
+
 let client;
 if (process.env.ISLocal) {
   client = new DynamoDBClient({
@@ -43,6 +49,35 @@ export const TasksLambdaHandler = async (event) => {
         statusCode: 500,
         body: JSON.stringify({
           error: "Failed to get Tasks",
+          message: error.message,
+        }),
+      };
+    }
+  } else if (event.httpMethod === "POST") {
+    const body = JSON.parse(event.body);
+    const taskParam = {
+      id: uniqueIdGenerator().toString(),
+      userid: body.userid.toString(),
+      description: body.description.toString(),
+      taskname: body.taskname.toString(),
+    };
+    console.log("taskParam", taskParam);
+    const params = {
+      TableName: "task",
+      Item: taskParam,
+    };
+
+    try {
+      await ddbDocClient.send(new PutCommand(params));
+      return {
+        statusCode: 200,
+        body: JSON.stringify(taskParam),
+      };
+    } catch (error) {
+      return {
+        statusCode: 500,
+        body: JSON.stringify({
+          error: "Failed to create task",
           message: error.message,
         }),
       };
